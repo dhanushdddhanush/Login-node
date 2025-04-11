@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "../App.css";
+
 export default function Login() {
   const [form, setForm] = useState({ username: '', password: '' });
   const [msg, setMsg] = useState('');
@@ -11,17 +11,16 @@ export default function Login() {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/login', form);
+      const res = await axios.post('http://localhost:3000/auth/login', form);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
-      setMsg('Login successful!');
     } catch (err) {
       setMsg(err.response?.data?.error || 'Login failed');
     }
   };
 
   return (
-  <>
+    <>
     <div className="header">
       <p>Authenticator</p>
     </div>

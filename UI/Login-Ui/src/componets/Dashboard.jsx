@@ -1,40 +1,46 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import "../App.css";
+import { useNavigate } from 'react-router-dom';
+
 export default function Dashboard() {
-  const [msg, setMsg] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (!token) {
-      navigate('/login');
+      navigate('/'); 
       return;
     }
 
-
-    axios.get('http://localhost:3000/dashboard', {
-      headers: { Authorization: token }
+    axios.get('http://localhost:3000/auth/dashboard', {
+      headers: { Authorization: `Bearer ${token}` },
     })
-      .then(res => setMsg(res.data.message))
-      .catch(err => {
-        console.error(err);
-        navigate('/login');
+      .then(res => {
+        setMessage(res.data.message);
+      })
+      .catch(() => {
+        localStorage.removeItem('token'); 
+        navigate('/'); 
       });
   }, [navigate]);
-
   const handlelogout = () => {
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/');
   };
 
+
   return (
+    <>
     <div>
-      <h2>Dashboard</h2>
-      
-      <p>{msg}</p>
-      <button onClick={handlelogout}>Logout</button>
+       <div className="header">
+      <p>Dashboard</p>
     </div>
+    <div className="flexdiv">
+      <h1>{message}</h1>
+      <button className='logout' onClick={handlelogout}>Logout</button></div>
+    </div>
+    </>
   );
 }

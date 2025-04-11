@@ -39,7 +39,24 @@ button{
   border-radius: 10px;
   margin-bottom: 15px;
 }
-
+.logout{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.flexdiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 button {
   background: #007bff;
   color: white;

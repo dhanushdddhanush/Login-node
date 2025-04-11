@@ -5,17 +5,12 @@ import Dashboard from './componets/Dashboard';
 import './App.css';
 
 export default function App() {
-
-
   return (
     <BrowserRouter>
       <Routes>
-        
-        <Route path="/Dashboard" element={<Dashboard   />} />
+        <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Register/>} />
-        <Route path="/" element={<Login  />} />
-        <Route path="*" element={<Navigate to="/" />} />
-    
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

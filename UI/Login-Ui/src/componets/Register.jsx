@@ -10,10 +10,10 @@ export default function Register() {
   const register = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/register', form);
+      const res = await axios.post('http://localhost:3000/auth/register', form);
       setMsg(res.data.message);
       window.alert(res.data.message);
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       setMsg(err.response?.data?.error || 'Error registering');
     }
@@ -32,7 +32,7 @@ export default function Register() {
         <button>Register</button>
         <p>{msg}</p>
       </form>
-      <p>Already have an account? <a onClick={()=>navigate('/login')}>Login</a></p>
+      <p>Already have an account? <a onClick={()=>navigate('/')}>Login</a></p>
     </div>
     </>
   );
